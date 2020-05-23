@@ -26,6 +26,7 @@ from data_generator.object_detection_2d_photometric_ops import ConvertTo3Channel
 from data_generator.data_augmentation_chain_original_ssd import SSDDataAugmentation
 from data_generator.object_detection_2d_misc_utils import apply_inverse_transforms
 
+
 def run(train_dir, valid_dir, set_dir, model_dir):
     # train_dir = arguments.train_dir
     # valid_dir = arguments.valid_dir
