@@ -494,9 +494,11 @@ class DataGenerator:
                         # Check whether this class is supposed to be included in the dataset.
                         if (not self.include_classes == 'all') and (not class_id in self.include_classes): continue
                         pose = obj.find('pose', recursive=False).text
-                        truncated = int(obj.find('truncated', recursive=False).text)
+                        #truncated = int(obj.find('truncated', recursive=False).text)
+                        truncated = 0  # TODO Fix this once truncated added to xml files
                         if exclude_truncated and (truncated == 1): continue
-                        difficult = int(obj.find('difficult', recursive=False).text)
+                        #difficult = int(obj.find('difficult', recursive=False).text)
+                        difficult = 0  # TODO Fix this once difficult added to xml files
                         if exclude_difficult and (difficult == 1): continue
                         # Get the bounding box coordinates.
                         bndbox = obj.find('bndbox', recursive=False)

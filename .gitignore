@@ -97,4 +97,5 @@ ENV/
 # Ignore any files and directories that begin with the word "local"
 local*
 
+# Model files
 *.h5
