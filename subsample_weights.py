@@ -9,7 +9,7 @@ weights_source_path = '/Users/justinbutler/Desktop/school/Calgary/ML_Work/ssd_ke
 
 # TODO: Set the path and name for the destination weights file
 # that you want to create.
-weights_destination_path = 'subsampled.h5'
+weights_destination_path = '/Users/justinbutler/Desktop/school/Calgary/ML_Work/ssd_keras/weights/subsampled.h5'
 
 # Make a copy of the weights file.
 shutil.copy(weights_source_path, weights_destination_path)

@@ -24,19 +24,19 @@ from data_generator.object_detection_2d_misc_utils import apply_inverse_transfor
 img_height = 512
 img_width = 512
 n_classes = 3
-model_mode = 'training'
+model_mode = 'training'  # Or training
 
 # TODO: Set the paths to the dataset here.
-dataset_images_dir = '/Users/justinbutler/Desktop/test/tiny_test/M0201/JPEGImages'
-dataset_annotations_dir = '/Users/justinbutler/Desktop/test/tiny_test/M0201/Annotations/'
-dataset_image_set_filename = '/Users/justinbutler/Desktop/test/tiny_test/M0201/img_set.txt'
+dataset_images_dir = ['/Users/justinbutler/Desktop/test/tiny_test/M0101/JPEGImages']
+dataset_annotations_dir = ['/Users/justinbutler/Desktop/test/tiny_test/M0101/Annotations/']
+dataset_image_set_filename = ['/Users/justinbutler/Desktop/test/tiny_test/M0101/img_set.txt']
 
 # For image for inference
-single_img_path = '/Users/justinbutler/Desktop/test/tiny_test/M0201/JPEGImages/img000001.jpg'
+single_img_path = '/Users/justinbutler/Desktop/test/extra_tiny_test/M0201/JPEGImages/img000001.jpg'
 
 # Load model
 # TODO: Set the path to the `.h5` file of the model to be loaded.
-model_path = '/Users/justinbutler/Desktop/school/Calgary/ML_Work/ssd_keras/trained.h5'
+model_path = '/Users/justinbutler/Desktop/school/Calgary/ML_Work/ssd_keras/test_trained.h5'
 
 # The XML parser needs to now what object class names to look for
 # and in which order to map them to integers.
@@ -57,9 +57,9 @@ model = load_model(model_path, custom_objects=model_objects)
 
 dataset = DataGenerator()
 
-dataset.parse_xml(images_dirs=[dataset_images_dir],
-                  image_set_filenames=[dataset_image_set_filename],
-                  annotations_dirs=[dataset_annotations_dir],
+dataset.parse_xml(images_dirs=dataset_images_dir,
+                  image_set_filenames=dataset_image_set_filename,
+                  annotations_dirs=dataset_annotations_dir,
                   classes=classes,
                   include_classes='all',
                   exclude_truncated=False,
@@ -163,9 +163,9 @@ for box in y_pred_thresh[0]:
 # Create a `BatchGenerator` instance and parse the Pascal VOC labels.
 dataset = DataGenerator()
 
-dataset.parse_xml(images_dirs=[VOC_2007_images_dir],
-                  image_set_filenames=[VOC_2007_test_image_set_filename],
-                  annotations_dirs=[VOC_2007_annotations_dir],
+dataset.parse_xml(images_dirs=dataset_images_dir,
+                  image_set_filenames=dataset_image_set_filename,
+                  annotations_dirs=dataset_annotations_dir,
                   classes=classes,
                   include_classes='all',
                   exclude_truncated=False,

@@ -6,6 +6,7 @@ from keras.models import load_model
 from math import ceil
 import numpy as np
 from matplotlib import pyplot as plt
+import os
 
 from models.keras_ssd512 import ssd_512
 from keras_loss_function.keras_ssd_loss import SSDLoss
@@ -34,7 +35,7 @@ def lr_schedule(epoch):
 
 
 #  Modified Parameters
-n_classes = 80  # Number of positive classes, e.g. 20 for Pascal VOC, 80 for MS COCO
+n_classes = 3  # Number of positive classes, e.g. 20 for Pascal VOC, 80 for MS COCO
 new_model = True
 
 # If you're resuming a previous training, set `initial_epoch` and `final_epoch` accordingly.
@@ -47,7 +48,8 @@ classes = ['background',
            'bus', 'car', 'truck']
 
 # Set all filepaths
-weights_path = 'weights/COCO_512.h5'  # If creating new model
+print(os.getcwd())
+weights_path = 'weights/subsampled.h5'  # If creating new model
 model_path = ''  # If loading pre-trained model
 
 
@@ -270,5 +272,5 @@ history = model.fit_generator(generator=train_generator,
 
 print('Training Complete')
 
-model.save('trained.h5')
+model.save('test_trained.h5')
 print('Saving model to: trained.h5')
