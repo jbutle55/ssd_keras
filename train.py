@@ -50,7 +50,7 @@ classes = ['background',
 # Set all filepaths
 print(os.getcwd())
 weights_path = 'weights/subsampled.h5'  # If creating new model
-model_path = ''  # If loading pre-trained model
+model_path = 'trained_epoch_123.h5'  # If loading pre-trained model
 
 
 train_img_paths = ['/Users/justinbutler/Desktop/test/tiny_test/M0201/JPEGImages']  # The directories that contain the images.
@@ -126,6 +126,8 @@ if new_model is True:
 
 else:
     #  OR Load Model
+
+    initial_epoch = int(model_path[-6:-3]) + 1
 
     # We need to create an SSDLoss object in order to pass that to the model loader.
     ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
@@ -272,5 +274,5 @@ history = model.fit_generator(generator=train_generator,
 
 print('Training Complete')
 
-model.save('test_trained.h5')
-print('Saving model to: trained.h5')
+model.save('trained_epoch_{}.h5'.format(final_epoch))
+print('Saving model to: trained_epoch_{}.h5'.format(final_epoch))

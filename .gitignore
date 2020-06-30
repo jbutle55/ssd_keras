@@ -100,3 +100,4 @@ local*
 # Model and logging files
 *.h5
 *.csv
+*.png

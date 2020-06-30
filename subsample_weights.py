@@ -9,7 +9,7 @@ weights_source_path = '/Users/justinbutler/Desktop/school/Calgary/ML_Work/ssd_ke
 
 # TODO: Set the path and name for the destination weights file
 # that you want to create.
-weights_destination_path = '/Users/justinbutler/Desktop/school/Calgary/ML_Work/ssd_keras/weights/subsampled.h5'
+weights_destination_path = '/Users/justinbutler/Desktop/school/Calgary/ML_Work/ssd_keras/weights/subsampled_8_classes.h5'
 
 # Make a copy of the weights file.
 shutil.copy(weights_source_path, weights_destination_path)
@@ -44,7 +44,7 @@ n_classes_source = 81
 #       `classes_of_interest` to an integer instead of the list below. Either way, don't forget to
 #       include the background class. That is, if you set an integer, and you want `n` positive classes,
 #       then you must set `classes_of_interest = n + 1`.
-classes_of_interest = [0, 3, 7, 9]
+classes_of_interest = [0, 1, 2, 3, 4, 6, 7, 8, 9, 10]
 # classes_of_interest = 9 # Uncomment this in case you want to just randomly sub-sample the last axis instead of providing a list of indices.
 
 for name in classifier_names:
