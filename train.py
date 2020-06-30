@@ -6,6 +6,7 @@ from keras.models import load_model
 from math import ceil
 import numpy as np
 from matplotlib import pyplot as plt
+import os
 
 from models.keras_ssd512 import ssd_512
 from keras_loss_function.keras_ssd_loss import SSDLoss
@@ -34,7 +35,7 @@ def lr_schedule(epoch):
 
 
 #  Modified Parameters
-n_classes = 80  # Number of positive classes, e.g. 20 for Pascal VOC, 80 for MS COCO
+n_classes = 3  # Number of positive classes, e.g. 20 for Pascal VOC, 80 for MS COCO
 new_model = True
 
 # If you're resuming a previous training, set `initial_epoch` and `final_epoch` accordingly.
@@ -47,17 +48,18 @@ classes = ['background',
            'bus', 'car', 'truck']
 
 # Set all filepaths
-weights_path = 'weights/COCO_512.h5'  # If creating new model
-model_path = ''  # If loading pre-trained model
+print(os.getcwd())
+weights_path = 'weights/subsampled.h5'  # If creating new model
+model_path = 'trained_epoch_123.h5'  # If loading pre-trained model
 
 
-train_img_paths = ['/Users/justinbutler/Desktop/test/M0201/JPEGImages']  # The directories that contain the images.
-train_annot_paths = ['/Users/justinbutler/Desktop/test/M0201/Annotations']  # The directories that contain the annotations.
-train_img_set_paths = ['/Users/justinbutler/Desktop/test/M0201/img_set.txt']  # The paths to the image sets.
+train_img_paths = ['/Users/justinbutler/Desktop/test/tiny_test/M0201/JPEGImages']  # The directories that contain the images.
+train_annot_paths = ['/Users/justinbutler/Desktop/test/tiny_test/M0201/Annotations']  # The directories that contain the annotations.
+train_img_set_paths = ['/Users/justinbutler/Desktop/test/tiny_test/M0201/img_set.txt']  # The paths to the image sets.
 
-valid_img_paths = ['/Users/justinbutler/Desktop/test/M0101/JPEGImages']  # The directories that contain the images.
-valid_annot_paths = ['/Users/justinbutler/Desktop/test/M0101/Annotations']  # The directories that contain the annotations.
-valid_img_set_paths = ['/Users/justinbutler/Desktop/test/M0101/img_set.txt']  # The paths to the image sets.
+valid_img_paths = ['/Users/justinbutler/Desktop/test/tiny_test/M0101/JPEGImages']  # The directories that contain the images.
+valid_annot_paths = ['/Users/justinbutler/Desktop/test/tiny_test/M0101/Annotations']  # The directories that contain the annotations.
+valid_img_set_paths = ['/Users/justinbutler/Desktop/test/tiny_test/M0101/img_set.txt']  # The paths to the image sets.
 
 #  Fixed Parameters
 img_height = 512  # Height of the model input images
@@ -124,6 +126,8 @@ if new_model is True:
 
 else:
     #  OR Load Model
+
+    initial_epoch = int(model_path[-6:-3]) + 1
 
     # We need to create an SSDLoss object in order to pass that to the model loader.
     ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
@@ -267,3 +271,8 @@ history = model.fit_generator(generator=train_generator,
                               validation_steps=ceil(
                                   val_dataset_size/batch_size),
                               initial_epoch=initial_epoch)
+
+print('Training Complete')
+
+model.save('trained_epoch_{}.h5'.format(final_epoch))
+print('Saving model to: trained_epoch_{}.h5'.format(final_epoch))

@@ -617,12 +617,18 @@ class Evaluator:
                 print("No predictions for class {}/{}".format(class_id, self.n_classes))
                 true_positives.append(true_pos)
                 false_positives.append(false_pos)
+
+                # Fix bug for if there are no detections of a class
+                cumulative_true_pos = np.cumsum(true_pos) # Cumulative sums of the true positives
+                cumulative_false_pos = np.cumsum(false_pos) # Cumulative sums of the false positives
+                cumulative_true_positives.append(cumulative_true_pos)
+                cumulative_false_positives.append(cumulative_false_pos)
                 continue
 
             # Convert the predictions list for this class into a structured array so that we can sort it by confidence.
 
             # Get the number of characters needed to store the image ID strings in the structured array.
-            num_chars_per_image_id = len(str(predictions[0][0])) + 6 # Keep a few characters buffer in case some image IDs are longer than others.
+            num_chars_per_image_id = len(str(predictions[0][0])) + 15 # Keep a few characters buffer in case some image IDs are longer than others. Chane from 6 to 15
             # Create the data type for the structured array.
             preds_data_type = np.dtype([('image_id', 'U{}'.format(num_chars_per_image_id)),
                                         ('confidence', 'f4'),
