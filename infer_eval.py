@@ -23,7 +23,7 @@ from data_generator.object_detection_2d_misc_utils import apply_inverse_transfor
 # Set a few configuration parameters.
 img_height = 512
 img_width = 512
-n_classes = 3
+n_classes = 9
 model_mode = 'training'  # Or training
 
 # TODO: Set the paths to the dataset here.
@@ -33,6 +33,14 @@ dataset_annotations_dir = [
     '/Users/justinbutler/Desktop/test/tiny_test/M0101/Annotations/']
 dataset_image_set_filename = [
     '/Users/justinbutler/Desktop/test/tiny_test/M0101/img_set.txt']
+
+dataset_images_dir = [
+    '/Users/justinbutler/Desktop/school/Calgary/ML_Work/Datasets/aerial-cars-dataset-master/aerial/valid']
+dataset_annotations_dir = [
+    '/Users/justinbutler/Desktop/school/Calgary/ML_Work/Datasets/aerial-cars-dataset-master/aerial/valid_annot']
+dataset_image_set_filename = [
+    '/Users/justinbutler/Desktop/school/Calgary/ML_Work/Datasets/aerial-cars-dataset-master/aerial/valid_set.txt']
+
 
 # For image for inference
 single_img_path = '/Users/justinbutler/Desktop/test/extra_tiny_test/M0201/JPEGImages/img000001.jpg'
@@ -44,7 +52,7 @@ model_path = '/Users/justinbutler/Desktop/school/Calgary/ML_Work/ssd_keras/test_
 # The XML parser needs to now what object class names to look for
 # and in which order to map them to integers.
 classes = ['background',
-           'car', 'bus', 'truck']
+           'person', 'bicycle', 'car', 'motorbike', 'bus', 'train', 'truck', 'building', 'traffic light']  # Repurposing class 9 (boat) to building
 
 # We need to create an SSDLoss object in order to pass that to the model loader.
 ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)

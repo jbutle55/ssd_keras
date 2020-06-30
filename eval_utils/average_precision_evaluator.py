@@ -628,7 +628,7 @@ class Evaluator:
             # Convert the predictions list for this class into a structured array so that we can sort it by confidence.
 
             # Get the number of characters needed to store the image ID strings in the structured array.
-            num_chars_per_image_id = len(str(predictions[0][0])) + 15 # Keep a few characters buffer in case some image IDs are longer than others.
+            num_chars_per_image_id = len(str(predictions[0][0])) + 15 # Keep a few characters buffer in case some image IDs are longer than others. Chane from 6 to 15
             # Create the data type for the structured array.
             preds_data_type = np.dtype([('image_id', 'U{}'.format(num_chars_per_image_id)),
                                         ('confidence', 'f4'),
