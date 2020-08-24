@@ -4,13 +4,34 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
         {
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: train.py",
+            "type": "python",
+            "request": "launch",
+            "program": "/Users/justinbutler/Desktop/school/Calgary/ML_Work/ssd_keras/train.py",
+            "console": "integratedTerminal",
+            "args": ["--train_jpeg", "/Users/justinbutler/Desktop/test/tiny_test/M0201/JPEGImages",
+                    "--train_annot", "/Users/justinbutler/Desktop/test/tiny_test/M0201/Annotations",
+                    "--train_set", "/Users/justinbutler/Desktop/test/tiny_test/M0201/img_set.txt",
+                    "--valid_jpeg", "/Users/justinbutler/Desktop/test/tiny_test/M0101/JPEGImages",
+                    "--valid_annot", "/Users/justinbutler/Desktop/test/tiny_test/M0101/Annotations",
+                    "--valid_set", "/Users/justinbutler/Desktop/test/tiny_test/M0101/img_set.txt",
+                    "--model_path", "trained_epoch_123.h5",
+                    "--weights_path", "weights/subsampled.h5",
+                    "--classes", "bus", "car", "truck",
+                    "--epochs", "1",
+                    "--num_classes", "3",
+                    "--batch_size", "8",
+                    "--validate",
+                    "--new_model"]
+
         }
     ]
 }
